@@ -4,7 +4,7 @@ MAINTAINER Buurman
 
 RUN apt-get update
 RUN apt-get -y -q install curl lsb-release
-RUN curl -s --remote-name http://packages.ntop.org/apt/16.04/all/apt-ntop-stable.deb
+RUN curl -s --remote-name http://apt-stable.ntop.org/16.04/all/apt-ntop-stable.deb
 RUN dpkg -i apt-ntop-stable.deb
 RUN rm -rf apt-ntop-stable.deb
 
