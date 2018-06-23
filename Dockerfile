@@ -1,15 +1,21 @@
-FROM ubuntu:16.04
-MAINTAINER Matthew Mckenzie <mmckenzie@vostronet.com>
 
-RUN apt-get update && apt-get -y -q install wget lsb-release
-RUN wget http://apt-stable.ntop.org/16.04/all/apt-ntop-stable.deb
-RUN dpkg -i apt-ntop-stable.deb && rm -rf apt-ntop-stable.deb
+FROM ubuntu:16.04
+MAINTAINER Buurman
 
 RUN apt-get update
-RUN apt-get -y -q install ntopng ntopng-data redis-server libpcap0.8 tzdata
+RUN apt-get -y -q install curl lsb-release
+RUN curl -s --remote-name http://packages.ntop.org/apt/16.04/all/apt-ntop-stable.deb
+RUN dpkg -i apt-ntop-stable.deb
+RUN rm -rf apt-ntop-stable.deb
+
+RUN apt-get update
+RUN apt-get -y -q install ntopng redis-server libpcap0.8 libmysqlclient-dev
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 3003
 
-CMD ["ntopng"]
+RUN echo '#!/bin/bash\n/etc/init.d/redis-server start\nntopng "$@"' > /tmp/run.sh
+RUN chmod +x /tmp/run.sh
+
+ENTRYPOINT ["/tmp/run.sh"]
