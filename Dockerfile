@@ -12,4 +12,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 3003
 
-CMD ["ntopng --http-port 0.0.0.0:3003"]
+CMD ["ntopng"]
