@@ -10,6 +10,6 @@ RUN apt-get -y -q install ntopng ntopng-data tzdata
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-EXPOSE 3000
+EXPOSE 3003
 
 CMD ["ntopng"]
