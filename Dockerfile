@@ -12,4 +12,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 3003
 
-CMD ["ntopng -W :3003 -d"]
+CMD ["ntopng -w :3003 -d"]
